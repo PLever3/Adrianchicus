@@ -1,0 +1,22 @@
+li = ["red","green"]
+def color(event):
+     fra.configure(bg=li[0])
+     li[0],li[1] = li[1],li[0]
+ 
+def outgo(event):
+     root.destroy()
+ 
+from tkinter import *
+root = Tk()
+
+but = Button(root,text="Выход") 
+fra = Frame(root,width=1365,height=100,bg="Gray")
+
+ 
+fra.pack()
+but.pack()
+ 
+root.bind("<Return>",color)
+but.bind("<Button-1>",outgo)
+ 
+root.mainloop()
