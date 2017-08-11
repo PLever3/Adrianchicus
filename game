@@ -1,1 +1,55 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
+import pygame
+
+speed = 3
+
+up = pygame.K_w
+down = pygame.K_s
+left = pygame.K_a
+right = pygame.K_d
+
+if _name_ == '__main__':
+    pygame.init()
+
+    display = pygame.display.set_mode((640,382))
+
+    clock = pygame.time.Clock()
+
+    bg = pygame.image.load("bg.jpg")
+
+    hero = pygame.sprite.Sprite()
+    hero.image = pygame.Surface((16,16))
+    hero.image.fill((0,0,0))
+    hero.rect = hero.image.get_rect()
+    hero.rect.move_ip(312,232)
+
+    done = False
+    dt = 0
+    while not done:
+        for e in pygame.event.get():
+            if e.type == pygame.QUIT:
+                done = True
+                continue
+            if e.type == pygame.KEYDOWN \
+               and e.key == pygame.K_ESCAPE:
+                done = True
+                continue
+
+        keys = pygame.key.get_pressed()
+        if keys[up]:
+            hero.rect.move_ip(0, -speed)
+        if keys[down]:
+            hero.rect.move_ip(0, speed)
+        if keys[left]:
+            hero.rect.move_ip(-speed,0)
+        if keys[right]:
+            hero.rect.move_ip(speed, 0)
+
+        display.blit(hero.image, hero.rect)
+        pygame.display.flip()
+        display.blit(bg, (0,0))
+
+        dt = clock.tick(40)
+        
