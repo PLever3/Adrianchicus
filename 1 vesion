@@ -2,26 +2,19 @@ from kivy.app import App
 
 from kivy.uix.label import Label
 from kivy.uix.button import Button
-from kivy.uix.gridlayout import GridLayout
 from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.textinput import TextInput
 
 class IymApp(App):
-    def build(self):
-        gl = GridLayout(cols =2, spacing=100)
+   def build(self):
+       bl = BoxLayout(orientation="vertical")
 
-        gl.add_widget(Label(text="Easy Level"))
-        gl.add_widget( Button(text="5 numbers"))
+       bl.add_widget( Label())
+       bl.add_widget( TextInput())
+       bl.add_widget( Button(text="Start"))
+       bl.add_widget( Button(text="Check"))
 
-        gl.add_widget(Label(text="Normal Level"))
-        gl.add_widget( Button(text="6 numbers"))
-
-        gl.add_widget(Label(text="Heavy Level"))
-        gl.add_widget( Button(text="7 numbers"))
-
-        gl.add_widget(Label(text="Hard Level"))
-        gl.add_widget( Button(text="8 numbers"))
-
-        return gl
+       return bl
 
 if __name__ == "__main__":
-    IymApp().run()
+   IymApp().run()
