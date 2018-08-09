@@ -1,19 +1,85 @@
 from kivy.app import App
-
-from kivy.uix.label import Label
 from kivy.uix.button import Button
+from kivy.uix.label import Label
+from kivy.uix.textinput import TextInput
+from random import randint
+from kivy.clock import Clock
+
+from kivy.config import Config
+
+Config.set('graphics', 'resizable', '0');
+Config.set('graphics', 'width', '350');
+Config.set('graphics', 'height', '500');
+
+from kivy.core.window import Window
+
+Window.clearcolor = (.22, .25, 1, 1)
+
+from kivy.uix.boxlayout import BoxLayout
+
+temp = 0
 
 
-class IymApp(App):
-   def build(self):
-       bl = BoxLayout(orientation="vertical")
+class IYMApp(App):
+    def build(self):
+        global temp
 
-       bl.add_widget( Label())
-       bl.add_widget( TextInput())
-       bl.add_widget( Button(text="Start"))
-       bl.add_widget( Button(text="Check"))
+        def tick(dt):
+            ti.text = ''
+            global num
+            if num < 1:
+                l.text = ''
+                return
+            else:
+                l.text = str(temp % (10 ** num) // (10 ** (num - 1)))
+                num -= 1
+                Clock.schedule_once(tick, 1)
 
-       return bl
+        def ticker(inatnce):
+            global num
+            global temp
+            num = int(ti2.text)
+            temp = randint(10 ** (num - 1), 10 ** num - 1)
+            Clock.schedule_once(tick, 1)
+
+        def check(instance):
+            if temp == int(ti.text):
+                l.text = 'Correct'
+            else:
+                l.text = 'Incorrect'
+
+        bl = BoxLayout(orientation='vertical',
+                       padding=[50],
+                       spacing=5)
+
+        l2 = Label(text='enter the number of digits', font_size="20")
+        ti2 = TextInput()
+        l = Label(text='00000', font_size="30")
+        ti = TextInput()
+        button = Button(text='Start',
+                        background_color=[.4, 1, .14, 1],
+                        background_normal='',
+                        font_size='24')
+
+        button1 = Button(text="Check",
+                         background_color=[.70, .22, 1, 1],
+                         background_normal='',
+                         font_size='24')
+
+        l3 = Label(text='version 1.0',font_size='15')
+        button.bind(on_press=ticker)
+        button1.bind(on_press=check)
+
+        bl.add_widget(l2)
+        bl.add_widget(ti2)
+        bl.add_widget(l)
+        bl.add_widget(ti)
+        bl.add_widget(button)
+        bl.add_widget(button1)
+        bl.add_widget(l3)
+
+        return bl
+
 
 if __name__ == "__main__":
-   IymApp().run()
+    IYMApp().run()
