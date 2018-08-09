@@ -70,12 +70,15 @@ class IYMApp(App):
         button.bind(on_press=ticker)
         button1.bind(on_press=check)
 
-        bl.add_widget(l2)
-        bl.add_widget(ti2)
-        bl.add_widget(l)
-        bl.add_widget(ti)
+       #Buttons
         bl.add_widget(button)
         bl.add_widget(button1)
+        #TextInput
+        bl.add_widget(ti)
+        bl.add_widget(ti2)
+        #Label
+        bl.add_widget(l)
+        bl.add_widget(l2)
         bl.add_widget(l3)
 
         return bl
